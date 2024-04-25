@@ -30,6 +30,5 @@ function createTable(db: { exec: (arg0: string) => void; }) {
   )
 `);
   console.log("Created table 'transactions' in Database")
-}
-
+} 
 module.exports = connectToDatabase();
