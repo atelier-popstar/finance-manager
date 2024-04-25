@@ -2,17 +2,13 @@
 
 import React, { useState, useContext } from "react";
 import { DeleteForm } from "./delete-form";
+import { Transaction } from "./types";
 
+type TransactionCompProps = {
+    data: Transaction[];
+};
 
-type Transaction = {
-    id: number;
-    amount: number;
-    category: string;
-    tag: string;
-    date: string;
-  }
-
-const TransactionComp = ({data}) => {
+const TransactionComp = ({data}: TransactionCompProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     console.log(`data received by TransactionComp: ${data}`);

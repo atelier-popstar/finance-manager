@@ -1,21 +1,16 @@
-const fs = require("fs");
-const sqlite3 = require("sqlite3").verbose();
-const filepath = "./transactions.db";
+import fs from "fs";
+import sqlite3 from "sqlite3";
+import { open } from "sqlite";
 
-function connectToDatabase() {
-  if (fs.existsSync(filepath)) {
-    console.log("Connected to existing DB")
-    return new sqlite3.Database(filepath);
-  } else {
-    const db = new sqlite3.Database(filepath, (error: { message: any; }) => {
-      if (error) {
-        return console.error(error.message);
-      }
-      createTable(db);
-      console.log("Connected to the database successfully");
+export async function connectToDatabase(filename: string) {
+  if (fs.existsSync(filename)) {
+    return await open({
+      filename,
+      driver: sqlite3.Database,
     });
-    return db;
   }
+
+  throw new Error("Database not found");
 }
 
 function createTable(db: { exec: (arg0: string) => void; }) {
@@ -31,4 +26,3 @@ function createTable(db: { exec: (arg0: string) => void; }) {
 `);
   console.log("Created table 'transactions' in Database")
 } 
-module.exports = connectToDatabase();
