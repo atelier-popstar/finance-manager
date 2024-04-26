@@ -2,15 +2,41 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { connectToDatabase } from "./db";
+import React from "react";
 
-const db = require("./db.tsx");
+import { Transaction } from './types';
+import { skip } from "node:test";
+import { Database } from "sqlite";
 
-// CREATE TABLE todos (
-//   id SERIAL PRIMARY KEY,
-//   text TEXT NOT NULL
-// );
+
+export async function getLastID(db: Database){
+  try{
+    const lastTransaction = await db.get(`
+    SELECT * FROM transactions WHERE id=(SELECT max(id) FROM transactions);
+   `, (err: string, row: Transaction) => {
+    if (err) {
+      return console.log(`Query failed`)
+    }
+    return row.id
+   });
+
+    console.log(`lastID: ${lastTransaction.id}`)
+    return lastTransaction.id
+  } catch(e) {
+    console.log(`id retrieval failed: ${e}`)
+  }
+
+}
 
 export async function createTransaction(prevState: {message: string;}, formData: FormData) {
+
+  console.log(`createTransaction called`);
+
+  const db =  await connectToDatabase("./transactions.db");
+
+  const lastID = await getLastID(db)
+
   const schema = z.object({
     tag: z.string().min(1),
     amount: z.string().min(1),
@@ -21,7 +47,7 @@ export async function createTransaction(prevState: {message: string;}, formData:
     tag: formData.get("tag"),
     amount: formData.get("amount"),
     category: formData.get("category"),
-    date: formData.get("tag"),
+    date: formData.get("date"),
   });
 
   if (!parse.success) {
@@ -31,14 +57,16 @@ export async function createTransaction(prevState: {message: string;}, formData:
   const data = parse.data;
 
   try {
+    console.log(`attempting to insert item to DB`)
     await db.run(`
-      INSERT INTO todos (text)
-      VALUES (${data.amount}, ${data.category}, ${data.tag}, ${data.date}, )
+      INSERT INTO transactions 
+      VALUES ('${lastID+1}','${data.tag}', '${data.amount}', '${data.category}', '${data.date}')
     `);
-
+    console.log(` data: ${data.amount, data.category, data.tag, data.date}`)
     revalidatePath("/");
     return { message: `Added transaction ${data.tag}` };
   } catch (e) {
+    console.log(`db insert fail: ${e}`)
     return { message: "Failed to create transaction: SQLite DB error" };
   }
 }
@@ -49,6 +77,8 @@ export async function deleteTransaction(
   },
   formData: FormData,
 ) {
+
+  const db =  await connectToDatabase("./transactions.db");
   const schema = z.object({
     id: z.string().min(1),
     name: z.string().min(1),

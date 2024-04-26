@@ -12,7 +12,7 @@ function SubmitButton() {
 
   return (
     <button type="submit" aria-disabled={pending}>
-      Add
+      Add Transaction
     </button>
   );
 }
