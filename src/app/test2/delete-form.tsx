@@ -17,13 +17,13 @@ function DeleteButton() {
   );
 }
 
-export function DeleteForm({ id, name }: { id: number; name: string }) {
+export function DeleteForm({ id, tag }: { id: number; tag: string }) {
   const [state, formAction] = useFormState(deleteTransaction, initialState);
 
   return (
     <form action={formAction}>
       <input type="hidden" name="id" value={id} />
-      <input type="hidden" name="name" value={name} />
+      <input type="hidden" name="tag" value={tag} />
       <DeleteButton />
       <p aria-live="polite" className="sr-only" role="status">
         {state?.message}

@@ -1,4 +1,4 @@
-"use server";
+'use server';
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -33,9 +33,10 @@ export async function createTransaction(prevState: {message: string;}, formData:
 
   console.log(`createTransaction called`);
 
-  const db =  await connectToDatabase("./transactions.db");
+  const db: Database =  await connectToDatabase("./transactions.db");
 
-  const lastID = await getLastID(db)
+  let lastID: number = await getLastID(db);
+  lastID++;
 
   const schema = z.object({
     tag: z.string().min(1),
@@ -60,7 +61,7 @@ export async function createTransaction(prevState: {message: string;}, formData:
     console.log(`attempting to insert item to DB`)
     await db.run(`
       INSERT INTO transactions 
-      VALUES ('${lastID+1}','${data.tag}', '${data.amount}', '${data.category}', '${data.date}')
+      VALUES ('${lastID}','${data.amount}', '${data.category}', '${data.tag}', '${data.date}')
     `);
     console.log(` data: ${data.amount, data.category, data.tag, data.date}`)
     revalidatePath("/");
@@ -78,25 +79,32 @@ export async function deleteTransaction(
   formData: FormData,
 ) {
 
+  console.log(`deleteTransaction called`)
+
   const db =  await connectToDatabase("./transactions.db");
+
   const schema = z.object({
     id: z.string().min(1),
-    name: z.string().min(1),
+    tag: z.string().min(1),
   });
   const data = schema.parse({
     id: formData.get("id"),
-    todo: formData.get("name"),
+    tag: formData.get("tag"),
   });
 
   try {
+
+    console.log(`id read by delete form: ${data.id}`)
     await db.run(`
-      DELETE FROM todos
-      WHERE id = ${data.id};
+      DELETE FROM transactions WHERE id = '${data.id}';
     `);
 
     revalidatePath("/");
-    return { message: `Deleted transaction ${data.name}` };
+    console.log(`Deleted transaction ${data.tag}`)
+
+    return { message: `Deleted transaction ${data.tag}` };
   } catch (e) {
+    console.log(`failed to delete transaction: ${e}`)
     return { message: "Failed to delete transaction" };
   }
 }
