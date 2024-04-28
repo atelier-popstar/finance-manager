@@ -29,7 +29,7 @@ export function AddForm() {
       <label htmlFor="category">Transaction Category</label>
       <input type="text" id="category" name="category" required />
       <label htmlFor="date">Transaction Date</label>
-      <input type="text" id="date" name="date" required />
+      <input type="date" id="date" name="date" required />
       <SubmitButton />
       <p aria-live="polite" className="sr-only" role="status">
         {state?.message}
