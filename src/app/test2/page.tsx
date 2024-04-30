@@ -1,7 +1,9 @@
 import { AddForm } from "./add-form";
-import TransactionComp from "./transactions";
 import { connectToDatabase } from "./db";
 import { Transaction } from "./types";
+import { parseByMonth } from "./expense-visualizer";
+import TransactionGraph from "./transaction-graph"
+import TransactionComp from "./transactions";
 
 export default async function Home() {
 
@@ -11,9 +13,17 @@ export default async function Home() {
     "SELECT * FROM transactions"
   );
 
+  const graphData: Object[] = await parseByMonth(transactions)
+
+  // for (let i in graphData) {
+  //   console.log(`category: ${graphData[i].category}, amount: ${graphData[i].amount}, date: ${graphData[i].date}`)
+  // }
+
+
   return (
     <main>
-      <h1 className="sr-only">Transactions</h1>
+      <TransactionGraph data={graphData} />
+      <h1>Transactions</h1>
       <AddForm />
       <TransactionComp data={transactions} />
     </main>

@@ -4,4 +4,14 @@ export type Transaction = {
     category: string;
     tag: string;
     date: string;
-  };
+};
+
+export type MonthExpenseData = {
+  month: string;
+  expense: SpendingCategory[]
+};
+
+export type SpendingCategory = {
+  tag: string;
+  amount: number;
+};
