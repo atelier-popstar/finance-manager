@@ -27,7 +27,14 @@ export function AddForm() {
       <label htmlFor="amount">Transaction Amount</label>
       <input type="text" id="amount" name="amount" required />
       <label htmlFor="category">Transaction Category</label>
-      <input type="text" id="category" name="category" required />
+      <select id="category" name="category" required>
+        <option value = "Admin">Admin</option>
+        <option value = "Pleasure">Pleasure</option>
+        <option value = "Interpersonal">Interpersonal</option>
+        <option value = "Groceries">Groceries</option>
+        <option value = "Gifts & Purchases">Gifts & Purchases</option>
+        <option value = "Food & Drink">Food & Drink</option>
+      </select>
       <label htmlFor="date">Transaction Date</label>
       <input type="date" id="date" name="date" required />
       <SubmitButton />

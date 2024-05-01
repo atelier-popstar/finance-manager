@@ -6,7 +6,6 @@ import { connectToDatabase } from "./db";
 import React from "react";
 
 import { Transaction } from './types';
-import { skip } from "node:test";
 import { Database } from "sqlite";
 
 

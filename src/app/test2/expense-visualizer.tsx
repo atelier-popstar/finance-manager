@@ -64,19 +64,6 @@ async function categorizeExpense(data: Transaction[]) {
             lastMonthIndex = month;
 
         }
-
-        // console.log(`index: ${i}, month: ${month}, category: ${category}, amount: ${amount}`)
-        // for (let i=0; i< months.length; i++){
-        //     for (let j=0; j< months[i].expense.length; j++){
-            
-        //         console.log(`month ${i}: ${months[i].month}, expense cat: ${months[i].expense[j].tag}, amount: ${months[i].expense[j].amount}`)
-        //     }
-        // }
-
-        // for (let i=0; i< thisMonth.expense.length; i++){
-            
-        //     console.log(`thisMonth: ${thisMonth.month}, expense cat: ${thisMonth.expense[i].tag}, amount: ${thisMonth.expense[i].amount}`)
-        // }
     }
 
     thisMonth.expense[thisMonth.expense.length] = thisCategory;

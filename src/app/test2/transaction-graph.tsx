@@ -42,11 +42,14 @@ const TransactionGraph = ({data}: TransactionGraphProps) => {
                     data={data}
                     index="date"
                     categories={[
-                        'Groceries',
+                        'Admin',
                         'Pleasure',
-                        'Communist Memoribilia',
+                        'Interpersonal',
+                        'Groceries',
+                        'Gifts & Purchases',
+                        'Food & Drink',
                     ]}
-                    colors={['blue', 'violet', 'fuchsia']}
+                    colors={['blue', 'violet', 'fuchsia', 'red', 'orange', 'green']}
                     valueFormatter={valueFormatter}
                     yAxisWidth={55}
                     onValueChange={() => { }}
