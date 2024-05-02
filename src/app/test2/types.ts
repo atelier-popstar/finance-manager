@@ -6,12 +6,22 @@ export type Transaction = {
     date: string;
 };
 
-export type MonthExpenseData = {
-  month: string;
-  expense: SpendingCategory[]
-};
+// export type MonthExpenseData = {
+//   month: string;
+//   expense: SpendingCategory[]
+// };
 
 export type SpendingCategory = {
   tag: string;
   amount: number;
+};
+
+export type MonthExpenseData = {
+  month: string;
+  'Admin': number;
+  'Pleasure': number;
+  'Interpersonal': number;
+  'Groceries': number;
+  'Gifts & Purchases': number;
+  'Food & Drink': number;
 };

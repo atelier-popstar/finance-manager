@@ -7,95 +7,84 @@ async function categorizeExpense(data: Transaction[]) {
     let months: MonthExpenseData[] = [];
 
     var lastMonthIndex: string = '';
-    var lastCategoryIndex: string = '';
 
     let thisMonth: MonthExpenseData = {
         month: '',
-        expense: []
+        'Admin': 0,
+        'Pleasure': 0,
+        'Interpersonal': 0,
+        'Groceries': 0,
+        'Gifts & Purchases': 0,
+        'Food & Drink': 0,
     }
 
-    let thisCategory: SpendingCategory = {
-        tag: '',
-        amount: 0,
-    }
+    type MonthExpenseDataKey = keyof typeof thisMonth;
+
 
     for (let i = 0; i < data.length; i++) {
 
-        let month = data[i].date.substring(0, 7);
-        let category = data[i].category;
-        let amount = data[i].amount;
+        let month:string = data[i].date.substring(0, 7);
+        let category = data[i].category as keyof typeof thisMonth;
+        let amount: number = data[i].amount;
+
+        
 
         
 
         if (i == 0) {
             lastMonthIndex = month;
             thisMonth.month = month;
-            lastCategoryIndex = category;
-            thisCategory.tag = category;
         }
 
-        if (month == lastMonthIndex) {
-            if (category == lastCategoryIndex) {
-                thisCategory.amount += amount;
-
-            } else {
-                thisMonth.expense[thisMonth.expense.length] = thisCategory;
-                thisCategory = {
-                    tag: category,
-                    amount: amount,
-                }
-                lastCategoryIndex = category;
-            }
-
-        } else {
-            thisMonth.expense[thisMonth.expense.length] = thisCategory;
-            thisCategory = {
-                tag: category,
-                amount: amount,
-            }
-            lastCategoryIndex = category;
-
-
+        if (month != lastMonthIndex) {
             months[months.length] = thisMonth;
-            thisMonth = {
-                month: month,
-                expense: [],
-            }
             lastMonthIndex = month;
 
+            thisMonth = {
+                month: '',
+                'Admin': 0,
+                'Pleasure': 0,
+                'Interpersonal': 0,
+                'Groceries': 0,
+                'Gifts & Purchases': 0,
+                'Food & Drink': 0,
+            }
         }
+
+        thisMonth[category] += amount;
+
     }
 
-    thisMonth.expense[thisMonth.expense.length] = thisCategory;
+    
     months[months.length] = thisMonth;
 
     return months;
 }
 
-async function toJSON(data: MonthExpenseData[]) {
+// async function toJSON(data: MonthExpenseData[]) {
 
-    let output: Object[] = [];
-    for (let i=0; i< data.length; i++){
-        let month: string = data[i].month;
-        let string: string = `{"date":"${month}"`;
-        console.log(string)
-        for (let j=0; j< data[i].expense.length; j++){
-            let tag: string = data[i].expense[j].tag;
-            let amount: string = data[i].expense[j].amount.toString();
-            let catString:string = `"${tag}":${amount}`;
-            string = string.concat(', ', catString);
-            console.log(string);
-        }
-        string = string.concat(' ', '}');
-        console.log(string)
-        const obj: Object = JSON.parse(string);
-        console.log(`obj: ${obj}`)
-        output[output.length] = obj
-    }
+//     let output: Object[] = [];
+//     for (let i=0; i< data.length; i++){
+//         let month: string = data[i].month;
+//         let string: string = `{"date":"${month}"`;
+//         console.log(string)
+//         for (let j=0; j< data[i].expense.length; j++){
+//             let tag: string = data[i].expense[j].tag;
+//             let amount: string = data[i].expense[j].amount.toString();
+//             let catString:string = `"${tag}":${amount}`;
+//             string = string.concat(', ', catString);
+//             console.log(string);
+//         }
+//         string = string.concat(' ', '}');
+//         console.log(string)
+//         const obj: Object = JSON.parse(string);
+//         console.log(`obj: ${obj}`)
+//         output[output.length] = obj
+//     }
 
-    return output;
+//     return output;
 
-}
+// }
 
 async function trimDates(data: Transaction[]) {
     for (let i = 0; i< data.length; i++){
@@ -113,10 +102,7 @@ export async function parseByMonth(data: Transaction[]) {
     trimmedData.sort((a, b) => a.date.localeCompare(b.date))
 
     const sortedData: MonthExpenseData[] = await categorizeExpense(trimmedData);
-    const dataJSON = await toJSON(sortedData);
 
-
-
-    return dataJSON;
+    return sortedData;
 }
 
