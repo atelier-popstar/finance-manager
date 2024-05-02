@@ -1,4 +1,4 @@
-import { Transaction, MonthExpenseData, SpendingCategory } from "./types";
+import { Transaction, MonthExpenseData } from "./types";
 
 
 
@@ -17,9 +17,6 @@ async function categorizeExpense(data: Transaction[]) {
         'Gifts & Purchases': 0,
         'Food & Drink': 0,
     }
-
-    type MonthExpenseDataKey = keyof typeof thisMonth;
-
 
     for (let i = 0; i < data.length; i++) {
 
@@ -60,31 +57,6 @@ async function categorizeExpense(data: Transaction[]) {
 
     return months;
 }
-
-// async function toJSON(data: MonthExpenseData[]) {
-
-//     let output: Object[] = [];
-//     for (let i=0; i< data.length; i++){
-//         let month: string = data[i].month;
-//         let string: string = `{"date":"${month}"`;
-//         console.log(string)
-//         for (let j=0; j< data[i].expense.length; j++){
-//             let tag: string = data[i].expense[j].tag;
-//             let amount: string = data[i].expense[j].amount.toString();
-//             let catString:string = `"${tag}":${amount}`;
-//             string = string.concat(', ', catString);
-//             console.log(string);
-//         }
-//         string = string.concat(' ', '}');
-//         console.log(string)
-//         const obj: Object = JSON.parse(string);
-//         console.log(`obj: ${obj}`)
-//         output[output.length] = obj
-//     }
-
-//     return output;
-
-// }
 
 async function trimDates(data: Transaction[]) {
     for (let i = 0; i< data.length; i++){
