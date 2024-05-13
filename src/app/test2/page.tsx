@@ -15,11 +15,6 @@ export default async function Home() {
 
   const graphData: MonthExpenseData[] = await parseByMonth(transactions)
 
-  // for (let i in graphData) {
-  //   console.log(`category: ${graphData[i].category}, amount: ${graphData[i].amount}, date: ${graphData[i].date}`)
-  // }
-
-
   return (
     <main>
       <TransactionGraph data={graphData} />

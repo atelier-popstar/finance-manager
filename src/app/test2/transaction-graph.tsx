@@ -1,7 +1,7 @@
 'use client';
 
 import { LineChart } from '@tremor/react';
-import { Transaction } from "./types";
+import { MonthExpenseData } from "./types";
 import React, { useState, useContext } from "react";
 
 
@@ -11,7 +11,7 @@ const valueFormatter = (number: number | bigint) =>
 
 
 type TransactionGraphProps = {
-    data: Object[];
+    data: MonthExpenseData[];
 };
 const TransactionGraph = ({data}: TransactionGraphProps) => {
 
@@ -40,7 +40,7 @@ const TransactionGraph = ({data}: TransactionGraphProps) => {
             <>
                 <LineChart
                     data={data}
-                    index="date"
+                    index='month'
                     categories={[
                         'Admin',
                         'Pleasure',

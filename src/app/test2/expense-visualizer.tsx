@@ -23,11 +23,7 @@ async function categorizeExpense(data: Transaction[]) {
         let month:string = data[i].date.substring(0, 7);
         let category = data[i].category as keyof typeof thisMonth;
         let amount: number = data[i].amount;
-
         
-
-        
-
         if (i == 0) {
             lastMonthIndex = month;
             thisMonth.month = month;
@@ -52,7 +48,6 @@ async function categorizeExpense(data: Transaction[]) {
 
     }
 
-    
     months[months.length] = thisMonth;
 
     return months;
