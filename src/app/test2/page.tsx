@@ -2,7 +2,7 @@ import { AddForm } from "./add-form";
 import { connectToDatabase } from "./db";
 import { Transaction, MonthExpenseData } from "./types";
 import { parseByMonth } from "./expense-visualizer";
-import TransactionGraph from "./transaction-graph"
+import TransactionGraph from "./transaction-graph";
 import TransactionComp from "./transactions";
 
 export default async function Home() {
