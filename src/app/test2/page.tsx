@@ -1,26 +1,54 @@
-import { AddForm } from "./add-form";
-import { connectToDatabase } from "./db";
-import { Transaction, MonthExpenseData } from "./types";
-import { parseByMonth } from "./expense-visualizer";
-import TransactionGraph from "./transaction-graph";
-import TransactionComp from "./transactions";
+'use client'
 
-export default async function Home() {
+import { useState, useEffect } from 'react';
+import Calendar from 'react-calendar';
+import Header from '../header'
+import { Transaction } from "./types";
+import TransactionComp from "../transactions";
+import TransactionList from './tranlist';
+//import "react-calendar/dist/Calendar.css";
 
-  const db = await connectToDatabase("./transactions.db");
+type ValuePiece = Date | null;
 
-  const transactions: Transaction[] = await db.all(
-    "SELECT * FROM transactions"
-  );
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-  const graphData: MonthExpenseData[] = await parseByMonth(transactions)
+export default function Home() {
+
+  const [date, setDate] = useState<Value>(new Date());
+
+  const dateString: String | void = formatDateObject(date);
+  const transactions:Promise<Transaction[]> = TransactionList(dateString)
+ 
+
+  useEffect(() => {
+    
+  }, [date])
+  
+  
+
 
   return (
-    <main>
-      <TransactionGraph data={graphData} />
-      <h1>Transactions</h1>
-      <AddForm />
-      <TransactionComp data={transactions} />
-    </main>
+    <div>
+      <Header/>
+      <Calendar className="border border-red-950" onChange={setDate} value={date}/>
+      {/* <TransactionComp data={transactions}/> */}
+      <p className="border border-red-950 text-center"><span className='bold'>Selected Date:</span>{' '}
+        {date?.toString()}</p>
+      </div>
   );
+}
+
+function formatDateObject(date: ValuePiece | Value) {
+
+  if(date){
+    const year:String = date?.getFullYear().toString();
+    const month:String = date?.getMonth().toString();
+    const day:String = date?.getDate().toString();
+
+    const output:String = year + '-' + month + '-' + day
+
+    console.log(output)
+
+    return output;
+  }
 }
