@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState, useContext } from "react";
+import React, { useState, use } from "react";
 import { DeleteForm } from "./delete-form";
 import { Transaction } from "./types";
 
 type TransactionCompProps = {
-    data: Transaction[];
+    dataPromise: Promise<Transaction[]>;
 };
 
-const TransactionComp = ({data}: TransactionCompProps) => {
+const TransactionComp = ({dataPromise}: TransactionCompProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const data: Transaction[] = use(dataPromise)
 
     console.log(`data received by TransactionComp: ${data}`);
 
