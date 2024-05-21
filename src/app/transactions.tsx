@@ -38,7 +38,6 @@ const TransactionComp = ({data}: TransactionCompProps) => {
                             {transaction.amount}
                             {transaction.category}
                             {transaction.tag}
-                            {transaction.date}
                             <DeleteForm id={transaction.id} tag={transaction.tag} />
                         </li>
                     ))}

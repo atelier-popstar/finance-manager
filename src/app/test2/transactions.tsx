@@ -5,7 +5,7 @@ import { DeleteForm } from "./delete-form";
 import { Transaction } from "./types";
 
 type TransactionCompProps = {
-    dataPromise: Promise<Transaction[]>;
+    dataPromise: Transaction[];
 };
 
 const TransactionComp = ({dataPromise}: TransactionCompProps) => {
@@ -39,7 +39,6 @@ const TransactionComp = ({dataPromise}: TransactionCompProps) => {
                             {transaction.amount}
                             {transaction.category}
                             {transaction.tag}
-                            {transaction.date}
                             <DeleteForm id={transaction.id} tag={transaction.tag} />
                         </li>
                     ))}

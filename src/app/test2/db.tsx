@@ -1,9 +1,14 @@
+'use server'
+
 import fs from "fs";
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 
 export async function connectToDatabase(filename: string) {
+  console.log(`dbconnect called`)
   if (fs.existsSync(filename)) {
+
+    console.log(`existing db found`)
     return await open({
       filename,
       driver: sqlite3.Database,
