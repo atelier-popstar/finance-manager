@@ -34,11 +34,11 @@ const TransactionComp = ({data}: TransactionCompProps) => {
             <>
                 <ul>
                     {data?.map((transaction: Transaction) => (
-                        <li key={transaction.id}>
-                            {transaction.amount}
-                            {transaction.category}
-                            {transaction.tag}
+                        <li className="p-4 bg-red-100 border border-red-950" key={transaction.id}>
+                            {transaction.tag} {transaction.amount} {transaction.category}
+                            <p className="border border-red-950 bg-red-500">                                  
                             <DeleteForm id={transaction.id} tag={transaction.tag} />
+                            </p>
                         </li>
                     ))}
                 </ul>

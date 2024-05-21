@@ -59,7 +59,9 @@ export default function Home() {
       <DateContext.Provider value={value}>
         <DateSwitcher />
       </DateContext.Provider>
-      <TransactionComp data={transactions} />
+      <p className="grow">
+        <TransactionComp data={transactions} />
+      </p>
       </div>
       <p className="border border-red-950 text-center">
         <span className='bold'>Selected Date:</span>{' '}
