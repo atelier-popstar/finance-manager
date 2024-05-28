@@ -1,18 +1,17 @@
 import Link from 'next/link'
  
 export default function Layout({
-  transactionmanager,
   children,
 }: {
-  transactionmanager: React.ReactNode
+//   transactionmanager: React.ReactNode
   children: React.ReactNode
 }) {
   return (
     <>
-      <nav>
+      {/* <nav>
         <Link href="/transactioneditor">Open Transaction Editor</Link>
       </nav>
-      <div>{transactionmanager}</div>
+      <div>{transactionmanager}</div> */}
       <div>{children}</div>
     </>
   )

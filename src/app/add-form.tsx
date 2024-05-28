@@ -17,11 +17,20 @@ function SubmitButton() {
   );
 }
 
-export function AddForm() {
+export function AddForm({data}: Date) {
   const [state, formAction] = useFormState(createTransaction, initialState);
+  // const {date, setDate} = useContext(DateContext)
 
+
+  console.log(`date read from context:n  ${data}`)
   return (
-    <form action={formAction}>
+
+    <>
+    <p className="border border-red-950 text-center">
+        <span className='bold'>Selected Date:</span>{' '}
+        {data?.toString()}
+      </p>
+    <form className ="flex flex-col"action={formAction}>
       <label htmlFor="transaction">Transaction Name</label>
       <input type="text" id="tag" name="tag" required />
       <label htmlFor="amount">Transaction Amount</label>
@@ -37,10 +46,12 @@ export function AddForm() {
       </select>
       <label htmlFor="date">Transaction Date</label>
       <input type="date" id="date" name="date" required />
-      <SubmitButton />
+      <SubmitButton/>
       <p aria-live="polite" className="sr-only" role="status">
         {state?.message}
       </p>
     </form>
+    </>
   );
 }
+

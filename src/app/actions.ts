@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { connectToDatabase } from "./db";
-import React from "react";
 
 import { Transaction } from './types';
 import { Database } from "sqlite";

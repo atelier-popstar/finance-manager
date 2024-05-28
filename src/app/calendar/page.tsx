@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Header from '../header'
 import { Transaction } from "../types";
@@ -8,6 +8,7 @@ import TransactionComp from "../transactions";
 import TransactionList from './tranlist';
 import DateSwitcher from './calendar';
 import { DateContext } from './date-context';
+import { AddForm } from '../add-form';
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -16,6 +17,11 @@ export default function Home() {
   const [date, setDate] = useState<Value>(new Date());
   const value = { date, setDate };
   const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [editorToggle, setEditorToggle] = useState<Boolean>(false)
+  const toggleEditor = () => {
+    setEditorToggle(value => !value)
+    console.log(`toggled editor to ${editorToggle}`)
+  }
 
 
   //  useEffect(() => {
@@ -60,7 +66,8 @@ export default function Home() {
         <DateSwitcher />
       </DateContext.Provider>
       <p className="grow">
-        <TransactionComp data={transactions} />
+        {editorToggle ? (<TransactionComp data={transactions} />) : (<AddForm data = {date}/>) }
+        <button className="border border-red-950 bg-red-200 p-1"onClick={toggleEditor}>Toggle Transaction Editor</button>
       </p>
       </div>
       <p className="border border-red-950 text-center">
@@ -70,6 +77,8 @@ export default function Home() {
     </div>
   );
 }
+
+
 
 function formatDateObject(date: Value) {
 

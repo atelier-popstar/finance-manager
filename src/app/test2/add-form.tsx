@@ -2,6 +2,8 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { createTransaction } from "./actions";
+import { useContext } from "react";
+import { DateContext } from './date-context';
 
 const initialState = {
   message: "",
@@ -9,6 +11,7 @@ const initialState = {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+
 
   return (
     <button type="submit" aria-disabled={pending}>
@@ -19,6 +22,7 @@ function SubmitButton() {
 
 export function AddForm() {
   const [state, formAction] = useFormState(createTransaction, initialState);
+  const { date, setDate } = useContext(DateContext)
 
   return (
     <form action={formAction}>
