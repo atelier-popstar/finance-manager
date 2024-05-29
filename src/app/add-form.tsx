@@ -2,6 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { createTransaction } from "./actions";
+import { useEffect, useState } from "react";
 
 const initialState = {
   message: "",
@@ -17,12 +18,32 @@ function SubmitButton() {
   );
 }
 
+function formatDate(date: Date) {
+  
+  var month = '' + (date.getMonth() + 1);
+  var day = '' + date.getDate();
+  const year = date.getFullYear();
+
+  if (month.length < 2) 
+      month = '0' + month;
+  if (day.length < 2) 
+      day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+
 export function AddForm({data}: Date) {
   const [state, formAction] = useFormState(createTransaction, initialState);
-  // const {date, setDate} = useContext(DateContext)
+  const [date, setDate] = useState(formatDate(data))
+
+  useEffect(() => {
+    setDate(formatDate(data))
+    console.log(`state of data in addform: ${date}`)
+  }, [data]);
 
 
-  console.log(`date read from context:n  ${data}`)
+
+  console.log(`date read from context:n  ${date}`)
   return (
 
     <>
@@ -45,7 +66,7 @@ export function AddForm({data}: Date) {
         <option value = "Food & Drink">Food & Drink</option>
       </select>
       <label htmlFor="date">Transaction Date</label>
-      <input type="date" id="date" name="date" required />
+      <input type="date" id="date" name="date" defaultValue={date} required />
       <SubmitButton/>
       <p aria-live="polite" className="sr-only" role="status">
         {state?.message}
