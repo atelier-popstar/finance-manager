@@ -3,6 +3,7 @@
 import { useContext } from 'react';
 import { DateContext } from './date-context';
 import Calendar from 'react-calendar';
+import './Calendar.css'
 
 export const DateSwitcher = () => {
     const {date, setDate} = useContext(DateContext);
