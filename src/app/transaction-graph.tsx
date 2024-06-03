@@ -2,7 +2,7 @@
 
 import { LineChart } from '@tremor/react';
 import { MonthExpenseData } from "./types";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 
 
