@@ -44,8 +44,15 @@ const TrendBox = ({data}:TrendBoxProps) => {
 
 
     return(
-        <div className="flex-row border border-red-950">
-        </div>
+        <ul className="flex-col p-2 border border-red-950 ">
+            {trends?.map((cat:categoryTrend) =>(
+                <li className="flex-row p-2 border border-red-950">
+                    {cat.category}{cat.amount}{cat.trend.toString()}
+                    
+
+                </li>
+            ))}
+        </ul>
     )
     }
 
