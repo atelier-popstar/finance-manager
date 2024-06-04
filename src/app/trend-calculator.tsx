@@ -13,6 +13,15 @@ type categoryTrend = {
     trend: boolean;
 }
 
+const dict = {
+    admin: "Admin",
+    pleasure: "Pleasure",
+    interpersonal: "Interpersonal",
+    groceries: "Groceries",
+    purchases: "Gifts & Purchases",
+    food: "Food & Drink",
+}
+
 const TrendBox = ({data}:TrendBoxProps) => {
 
     const [isLoaded, setIsLoaded] = useState(false);
@@ -44,15 +53,28 @@ const TrendBox = ({data}:TrendBoxProps) => {
 
 
     return(
-        <ul className="flex-col p-2 border border-red-950 ">
+        <div className="flex flex-row justify-around p-2 border space-x-5 space-y-1 border-red-950 bg-red-400 ">
             {trends?.map((cat:categoryTrend) =>(
-                <li className="flex-row p-2 border border-red-950">
-                    {cat.category}{cat.amount}{cat.trend.toString()}
+                <div className="grow flex flex-col h-48 justify-center p-2 border border-red-950 bg-red-100">
+                    <h2 className="text-center">{dict[cat.category]}</h2>
+                    <div className="flex flex-row justify-center">
+                        <h3>{cat.amount}</h3>
+                        {cat.trend ? 
+                        <svg className="justify-center fill-red-600" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="0,30 15,0 30,30" />
+                        </svg> 
+                        : 
+                        <svg className="justify-center fill-emerald-600" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="0,0 15,30 30,0" />
+                        </svg>
+                        }
+                    </div>
+                    
                     
 
-                </li>
+                </div>
             ))}
-        </ul>
+        </div>
     )
     }
 
