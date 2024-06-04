@@ -9,7 +9,7 @@ type TrendBoxProps = {
 
 type categoryTrend = {
     category: string;
-    amount: number;
+    amount: string;
     trend: boolean;
 }
 
@@ -84,21 +84,18 @@ const TrendBox = ({data}:TrendBoxProps) => {
 
 function calculateTrends(data:MonthExpenseData[]){
 
-
     if(data){
         const latestTrends: categoryTrend[] = []
         const thisMonth: MonthExpenseData = data[data.length-1]
         const lastMonth: MonthExpenseData = data[data.length-2]
-    
-        console.log(`dp1: ${thisMonth.Admin}, dp2: ${lastMonth.Admin}`)
 
         const change = {
-            admin: thisMonth.Admin-lastMonth.Admin,
-            pleasure: thisMonth.Pleasure-lastMonth.Pleasure,
-            interpersonal: thisMonth.Interpersonal-lastMonth.Interpersonal,
-            groceries: thisMonth.Groceries-lastMonth.Groceries,
-            purchases: thisMonth["Gifts & Purchases"]-lastMonth["Gifts & Purchases"],
-            food: thisMonth["Food & Drink"]-lastMonth["Food & Drink"],
+            admin: thisMonth.Admin / lastMonth.Admin,
+            pleasure: thisMonth.Pleasure / lastMonth.Pleasure,
+            interpersonal: thisMonth.Interpersonal / lastMonth.Interpersonal,
+            groceries: thisMonth.Groceries / lastMonth.Groceries,
+            purchases: thisMonth["Gifts & Purchases"] / lastMonth["Gifts & Purchases"],
+            food: thisMonth["Food & Drink"] / lastMonth["Food & Drink"],
         }      
 
         console.log(`
@@ -109,15 +106,24 @@ function calculateTrends(data:MonthExpenseData[]){
 
         for (let category in change){
             var trend:boolean = false
+            var percentage = 0
+            var changeString = ""
 
-            if(change[category] >= 0){
+            if(change[category] > 1){
                 trend = true;
-
+                percentage = change[category]-1
+                changeString = (percentage * 100).toString().substring(0,6) + "%"
+                
+            } else if (change[category] == 1){
+                changeString = "0%"
+            } else if (change[category] < 1){
+                percentage = 1-change[category]
+                changeString = (percentage * 100).toString().substring(0,6) + "%"
             }
 
             latestTrends[latestTrends.length] = {
                 category: category,
-                amount: change[category],
+                amount: changeString,
                 trend:  trend,
             }
 
