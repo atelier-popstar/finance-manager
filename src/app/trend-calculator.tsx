@@ -55,21 +55,21 @@ const TrendBox = ({data}:TrendBoxProps) => {
     return(
         <div className="flex flex-row justify-around p-2 border space-x-5 border-red-950 bg-red-400 ">
             {trends?.map((cat:categoryTrend) =>(
-                <div className="grow flex flex-col h-48 rounded-lg justify-start p-2 border border-red-950 bg-red-100">
-                    <h2 className="text-center underline">{dict[cat.category]}</h2>
+                <div className="grow flex flex-col h-32 rounded-lg justify-start p-2 border border-red-950 bg-red-100">
+                    <h2 className="text-base text-center underline">{dict[cat.category]}</h2>
                     <div className="grow flex flex-row content-center justify-center">
-                        <h3 className="text-center content-center">{cat.amount}</h3>
+                        <h3 className="text-lg text-center content-center">{cat.amount}</h3>
                         {cat.trend ?
                         <div className="content-center"> 
-                        <svg className=" fill-red-600" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
-                            <polygon points="0,30 15,0 30,30" />
-                        </svg> 
+                            <svg className=" fill-red-600" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="0,30 15,0 30,30" />
+                            </svg> 
                         </div> 
                         : 
                         <div className="content-center"> 
-                        <svg className=" fill-emerald-600" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
-                            <polygon points="0,0 15,30 30,0" />
-                        </svg>
+                            <svg className=" fill-emerald-600" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="0,0 15,30 30,0" />
+                            </svg>
                         </div> 
                         }
                     </div>

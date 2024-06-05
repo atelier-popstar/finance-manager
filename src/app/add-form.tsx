@@ -47,10 +47,6 @@ export function AddForm({data}: Date) {
   return (
 
     <>
-    <p className="border border-red-950 text-center">
-        <span className='bold'>Selected Date:</span>{' '}
-        {data?.toString()}
-      </p>
     <form className ="flex flex-col"action={formAction}>
       <label htmlFor="transaction">Transaction Name</label>
       <input type="text" id="tag" name="tag" required />

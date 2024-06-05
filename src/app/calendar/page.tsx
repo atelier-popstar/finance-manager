@@ -67,13 +67,12 @@ export default function Home() {
       </DateContext.Provider>
       <p className="grow">
         {editorToggle ? (<TransactionComp data={transactions} />) : (<AddForm data = {date}/>) }
-        <button className="border border-red-950 bg-red-200 p-1"onClick={toggleEditor}>Toggle Transaction Editor</button>
+        <div className="flex grow justify-center">
+          <button className="p-4 rounded-lg bg-red-200 hover:bg-red-300 p-1"onClick={toggleEditor}>Toggle Transaction Editor</button>
+        </div>
+        
       </p>
       </div>
-      <p className="border border-red-950 text-center">
-        <span className='bold'>Selected Date:</span>{' '}
-        {date?.toString()}
-      </p>
     </div>
   );
 }

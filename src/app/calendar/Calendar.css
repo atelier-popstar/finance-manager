@@ -1,8 +1,9 @@
 .react-calendar {
-  width: 350px;
+  height: 500px;
+  width: 500px;
   max-width: 100%;
   background: white;
-  border: 1px solid #450a0a;
+  border: 0px solid #450a0a;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
 }
@@ -31,6 +32,7 @@
 }
 
 .react-calendar button {
+  height: 70px;
   margin: 0;
   border: 0;
   outline: none;

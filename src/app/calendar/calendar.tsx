@@ -8,7 +8,7 @@ import './Calendar.css'
 export const DateSwitcher = () => {
     const {date, setDate} = useContext(DateContext);
     return (
-        <Calendar className="border border-red-950" onChange={setDate} value={date} />
+        <Calendar className="border-0" onChange={setDate} value={date} />
     )
 }
 
