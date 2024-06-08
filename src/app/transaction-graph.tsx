@@ -1,7 +1,7 @@
 'use client';
 
 import { LineChart } from '@tremor/react';
-import { MonthExpenseData } from "./types";
+import { MonthExpenseData, SummedExpenseData } from "./types";
 import React, { useState } from "react";
 
 
@@ -54,6 +54,7 @@ const TransactionGraph = ({data}: TransactionGraphProps) => {
                     yAxisWidth={55}
                     onValueChange={() => { }}
                     className="mt-6 hidden h-96 sm:block"
+                    
                 />
             </>
         );

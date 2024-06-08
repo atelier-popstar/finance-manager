@@ -2,6 +2,7 @@ import { connectToDatabase } from "./db";
 import { Transaction, MonthExpenseData } from "./types";
 import { parseByMonth } from "./expense-visualizer";
 import TransactionGraph from "./transaction-graph";
+import ExpenseChart from "./expense-pie-chart";
 import TrendBox from "./trend-calculator";
 import Header from "./header";
 
@@ -19,10 +20,8 @@ export default async function Home() {
     <main className="flex flex-col ">
       <Header/>
       <TransactionGraph data={graphData} />
+      <ExpenseChart data={graphData} />
       <TrendBox data={graphData}/>
-      
-      
-      
     </main>
   );
 }
