@@ -1,6 +1,6 @@
 'use client';
 
-import { DonutChart } from '@tremor/react';
+import { DonutChart, Legend } from '@tremor/react';
 import { MonthExpenseData } from "./types";
 import React, { useState } from "react";
 
@@ -107,12 +107,18 @@ const ExpenseChart = ({data}: ExpenseChartProps) => {
     } else {
         console.log(`data updated successfully in piechart: ${data}`);
         return (
-        <div className="flex justify-center w-200 h-200">
+        <div className="flex flex-col items-center justify-center space-x-6">
             <DonutChart
                 data={expenseData.data}
                 variant="pie"
                 valueFormatter={valueFormatter}
+                colors={['blue', 'violet', 'fuchsia', 'red', 'orange', 'green']}
                 onValueChange={(v) => console.log(v)}
+            />
+            <Legend
+                categories={["Admin", "Pleasure", "Interpersonal", "Groceries", "Gifts & Purchases", "Food & Drinks"]}
+                colors={['blue', 'violet', 'fuchsia', 'red', 'orange', 'green']}
+                className="max-w-xs"
             />
         </div>
 

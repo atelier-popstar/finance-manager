@@ -19,8 +19,12 @@ export default async function Home() {
   return (
     <main className="flex flex-col ">
       <Header/>
-      <TransactionGraph data={graphData} />
-      <ExpenseChart data={graphData} />
+
+      <div className="flex flex-row">
+        <TransactionGraph data={graphData} />
+        <ExpenseChart data={graphData} />
+      </div>
+      
       <TrendBox data={graphData}/>
     </main>
   );

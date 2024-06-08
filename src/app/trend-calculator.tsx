@@ -53,9 +53,11 @@ const TrendBox = ({data}:TrendBoxProps) => {
 
 
     return(
-        <div className="flex flex-row justify-around p-2 border space-x-5 border-red-950 bg-red-400 ">
+        <div className="flex flex-col border border-red-950 bg-red-400">
+            <h1 className="text-center underline text-lg">Change from past month</h1>
+            <div className="flex flex-row justify-around p-2 space-x-5  ">
             {trends?.map((cat:categoryTrend) =>(
-                <div className="grow flex flex-col h-32 rounded-lg justify-start p-2 border border-red-950 bg-red-100">
+                <div className="grow flex flex-col h-32 rounded-lg justify-start p-2  border-red-950 bg-red-100">
                     <h2 className="text-base text-center underline">{dict[cat.category]}</h2>
                     <div className="grow flex flex-row content-center justify-center">
                         <h3 className="text-lg text-center content-center">{cat.amount}</h3>
@@ -79,6 +81,8 @@ const TrendBox = ({data}:TrendBoxProps) => {
                 </div>
             ))}
         </div>
+        </div>
+        
     )
     }
 

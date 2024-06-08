@@ -51,6 +51,7 @@ const TransactionGraph = ({data}: TransactionGraphProps) => {
                     ]}
                     colors={['blue', 'violet', 'fuchsia', 'red', 'orange', 'green']}
                     valueFormatter={valueFormatter}
+                    showYaxis='true'
                     yAxisWidth={55}
                     onValueChange={() => { }}
                     className="mt-6 hidden h-96 sm:block"
