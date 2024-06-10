@@ -107,7 +107,7 @@ const ExpenseChart = ({data}: ExpenseChartProps) => {
     } else {
         console.log(`data updated successfully in piechart: ${data}`);
         return (
-        <div className="flex flex-col items-center justify-center space-x-6">
+        <div className="flex flex-col  bg-red-300 border border-red-950 items-center justify-center space-x-6">
             <DonutChart
                 data={expenseData.data}
                 variant="pie"

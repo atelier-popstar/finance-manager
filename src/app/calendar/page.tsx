@@ -83,18 +83,20 @@ function formatDateObject(date: Value) {
 
   if (date) {
     const year: String = date?.getFullYear().toString();
-    const month: Number = date?.getMonth() + 1;
+    let month: String = (date?.getMonth() + 1).toString();
     let day: String = date?.getDate().toString();
 
     if(day.length < 2){
       day = '0' + day;
     }
 
-    const realMonth:String = '0' + month.toString();
+    if(month.length < 2){
+      month = '0' + month;
+    }
 
     
 
-    const output: String = year + '-' + realMonth+ '-' + day
+    const output: String = year + '-' + month+ '-' + day
 
     console.log(`formatDateObject success: ${output}`)
 

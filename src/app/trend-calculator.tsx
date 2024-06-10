@@ -53,11 +53,14 @@ const TrendBox = ({data}:TrendBoxProps) => {
 
 
     return(
-        <div className="flex flex-col border border-red-950 bg-red-400">
-            <h1 className="text-center underline text-lg">Change from past month</h1>
-            <div className="flex flex-row justify-around p-2 space-x-5  ">
+        <div className="flex flex-col items-center border p-2 border-red-950 bg-red-400 space-y-4">
+            <div className="flex rounded-lg justify-center bg-red-100 p-2 w-80">
+                <h1 className="text-center text-xl">Change from past month</h1>
+            </div>
+            
+            <div className="flex flex-row justify-around space-x-5  ">
             {trends?.map((cat:categoryTrend) =>(
-                <div className="grow flex flex-col h-32 rounded-lg justify-start p-2  border-red-950 bg-red-100">
+                <div className="grow flex flex-col w-48 h-32 rounded-lg justify-start p-2  border-red-950 bg-red-100">
                     <h2 className="text-base text-center underline">{dict[cat.category]}</h2>
                     <div className="grow flex flex-row content-center justify-center">
                         <h3 className="text-lg text-center content-center">{cat.amount}</h3>
@@ -88,7 +91,17 @@ const TrendBox = ({data}:TrendBoxProps) => {
 
 }
 
-
+function handleDiv(num1:number,num2:number){
+    if (num1 == 0 && num2 ==0){
+        return 1;
+    } else if (num1==0){
+        return 0.99;
+    } else if (num2==0){
+        return 1.01;
+    } else {
+        return num1/num2;
+    }
+}
 
 function calculateTrends(data:MonthExpenseData[]){
 
@@ -98,12 +111,12 @@ function calculateTrends(data:MonthExpenseData[]){
         const lastMonth: MonthExpenseData = data[data.length-2]
 
         const change = {
-            admin: thisMonth.Admin / lastMonth.Admin,
-            pleasure: thisMonth.Pleasure / lastMonth.Pleasure,
-            interpersonal: thisMonth.Interpersonal / lastMonth.Interpersonal,
-            groceries: thisMonth.Groceries / lastMonth.Groceries,
-            purchases: thisMonth["Gifts & Purchases"] / lastMonth["Gifts & Purchases"],
-            food: thisMonth["Food & Drink"] / lastMonth["Food & Drink"],
+            admin: handleDiv(thisMonth.Admin, lastMonth.Admin),
+            pleasure: handleDiv(thisMonth.Pleasure, lastMonth.Pleasure),
+            interpersonal: handleDiv(thisMonth.Interpersonal, lastMonth.Interpersonal),
+            groceries: handleDiv(thisMonth.Groceries, lastMonth.Groceries),
+            purchases: handleDiv(thisMonth["Gifts & Purchases"], lastMonth["Gifts & Purchases"]),
+            food: handleDiv(thisMonth["Food & Drink"], lastMonth["Food & Drink"]), 
         }      
 
         console.log(`
