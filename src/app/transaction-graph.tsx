@@ -1,7 +1,7 @@
 'use client';
 
 import { LineChart } from '@tremor/react';
-import { MonthExpenseData, SummedExpenseData } from "./types";
+import { MonthExpenseData } from "./types";
 import React, { useState } from "react";
 
 
@@ -26,6 +26,12 @@ const TransactionGraph = ({data}: TransactionGraphProps) => {
         console.log(`useEffect triggered, new data obj: ${data}`)
         return () => {
             dataUpdate();
+            for(let i=0;i<data.length;i++){
+                console.log(`state of month data: ${i}`)
+                for(const datum in data[i]){
+                    console.log(`${datum}: ${data[i][datum]}`)
+                }
+            }
         }
     }, [data])
 
@@ -51,7 +57,6 @@ const TransactionGraph = ({data}: TransactionGraphProps) => {
                     ]}
                     colors={['blue', 'violet', 'fuchsia', 'red', 'orange', 'green']}
                     valueFormatter={valueFormatter}
-                    showYaxis='true'
                     yAxisWidth={55}
                     onValueChange={() => { }}
                     className="mt-6 hidden h-96 sm:block"

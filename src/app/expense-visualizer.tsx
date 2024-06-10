@@ -34,7 +34,7 @@ async function categorizeExpense(data: Transaction[]) {
             lastMonthIndex = month;
 
             thisMonth = {
-                month: '',
+                month: month,
                 'Admin': 0,
                 'Pleasure': 0,
                 'Interpersonal': 0,
