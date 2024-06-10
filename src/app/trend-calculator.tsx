@@ -20,6 +20,7 @@ const dict = {
     groceries: "Groceries",
     purchases: "Gifts & Purchases",
     food: "Food & Drink",
+    total: "Total",
 }
 
 const TrendBox = ({data}:TrendBoxProps) => {
@@ -117,6 +118,7 @@ function calculateTrends(data:MonthExpenseData[]){
             groceries: handleDiv(thisMonth.Groceries, lastMonth.Groceries),
             purchases: handleDiv(thisMonth["Gifts & Purchases"], lastMonth["Gifts & Purchases"]),
             food: handleDiv(thisMonth["Food & Drink"], lastMonth["Food & Drink"]), 
+            total: handleDiv(thisMonth.Total, lastMonth.Total),
         }      
 
         console.log(`

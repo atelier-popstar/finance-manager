@@ -16,6 +16,7 @@ async function categorizeExpense(data: Transaction[]) {
         'Groceries': 0,
         'Gifts & Purchases': 0,
         'Food & Drink': 0,
+        'Total': 0,
     }
 
     for (let i = 0; i < data.length; i++) {
@@ -41,10 +42,12 @@ async function categorizeExpense(data: Transaction[]) {
                 'Groceries': 0,
                 'Gifts & Purchases': 0,
                 'Food & Drink': 0,
+                'Total': 0,
             }
         }
 
         thisMonth[category] += amount;
+        thisMonth['Total'] += amount;
 
     }
 

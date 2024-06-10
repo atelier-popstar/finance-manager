@@ -12,7 +12,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button type="submit" aria-disabled={pending}>
+    <button className="p-2 rounded-lg bg-red-500 hover:bg-red-600" type="submit" aria-disabled={pending}>
       Add Transaction
     </button>
   );
@@ -63,7 +63,7 @@ export function AddForm({data}: Date) {
       </select>
       <label htmlFor="date">Transaction Date</label>
       <input type="date" id="date" name="date" defaultValue={date} required />
-      <SubmitButton/>
+      <SubmitButton />
       <p aria-live="polite" className="sr-only" role="status">
         {state?.message}
       </p>

@@ -14,5 +14,6 @@ export type MonthExpenseData = {
   'Groceries': number;
   'Gifts & Purchases': number;
   'Food & Drink': number;
+  'Total': number,
 };
 

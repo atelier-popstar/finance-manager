@@ -54,8 +54,9 @@ const TransactionGraph = ({data}: TransactionGraphProps) => {
                         'Groceries',
                         'Gifts & Purchases',
                         'Food & Drink',
+                        'Total',
                     ]}
-                    colors={['blue', 'violet', 'fuchsia', 'red', 'orange', 'green']}
+                    colors={['blue', 'violet', 'fuchsia', 'red', 'orange', 'green', 'yellow']}
                     valueFormatter={valueFormatter}
                     yAxisWidth={55}
                     onValueChange={() => { }}

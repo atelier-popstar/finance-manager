@@ -34,9 +34,12 @@ const TransactionComp = ({data}: TransactionCompProps) => {
             <>
                 <ul>
                     {data?.map((transaction: Transaction) => (
-                        <li className="p-4 bg-red-100 border border-red-950" key={transaction.id}>
-                            {transaction.tag} {transaction.amount} {transaction.category}
-                            <p className="border border-red-950 bg-red-500">                                  
+                        <li className="flex flex-row space-x-2 p-4 bg-red-100 border border-red-950" key={transaction.id}>
+                            <p className="flex-initial rounded-lg p-2 bg-red-300"> {transaction.tag}</p>
+                            <p className="flex-initial rounded-lg p-2 bg-red-200"> {transaction.amount}€</p>
+                            <p className="flex-initial rounded-lg p-2 bg-red-200"> {transaction.category}</p> 
+                            <p className="flex flex-grow"></p>
+                            <p className="flex flex-initial justify-self-end rounded-lg p-2 bg-red-500 hover:bg-red-600">                                  
                             <DeleteForm id={transaction.id} tag={transaction.tag} />
                             </p>
                         </li>
